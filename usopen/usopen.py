@@ -11,6 +11,7 @@ The IPs and device type should be made available via an Excel spreadsheet
 
 '''
 import os
+import bootstrapper
 
 ## pyexcel and pyexce-xls are required for our program to execute
 # python3 -m pip install --user pyexcel
@@ -92,6 +93,16 @@ def main():
     print("\n***** BEGIN SHOW IP INT BRIEF *****")
     for x in entry.keys():
         print("\n" + interface_check(str(entry[x]), x, "admin", "alta3"))
+    print("\n***** NEW BOOTSTRAPPING CHECK *****")
+    ynchk = input("\nWould you like to apply a new configuration? y/N ")
+    if (ynchk.lower() == "y") or (ynchk.lower() == "yes"): # if user input yes or y
+        conf_loc = str(input("\nWhere is the location of the new config file? "))
+        conf_ip = str(input("\nWhat is the IP address of the device to be configured? "))
+
+        if bootstrapper.bootstrapper(entry[conf_ip], conf_ip, "admin", "alta3", conf_loc):
+            print("\nNew configuration applied!")
+        else:
+            printf("\nProblem in applying new configuration!")
 
 ## Call main()
 main()
