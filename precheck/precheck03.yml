@@ -1,0 +1,24 @@
+---
+ - name: Another network playbook example 
+   hosts: ~^arista 
+   gather_facts: no # 
+   
+   tasks:
+           - name: Harvest Arista facts 
+             eos_facts:
+             when: ansible_network_os == 'eos' 
+
+           - name: Push to the local system
+             copy:
+                     # use the to_nice_json filter to display pretty json output
+                     content: "{{ ansible_facts | to_nice_json }}"
+                     dest: "/home/student/python/{{ inventory_hostname }}.txt"
+                     # the inventory_hostname variable always resolves to the curent host being iterated against
+             tags:
+                     - never
+                     - grabfacts
+
+           - name: Getting at network interfaces
+             debug:
+                     var: "{{ ansible_facts.net_interfaces | length }}"
+
