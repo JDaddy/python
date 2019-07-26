@@ -1,0 +1,16 @@
+---
+- name: Push a script and run it
+  hosts: localhost
+
+  tasks:
+    ## If you want your script to only ever execute once
+    - script: /home/student/python/pyhello02.py
+      args:
+        ## exSING
+        executable: python3
+        creates: /home/student/stopper.txt
+        register: results
+
+    - debug:
+        msg: "{{ results }}"
+

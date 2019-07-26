@@ -1,0 +1,58 @@
+ansible-playbook 2.8.2
+  config file = /home/student/python/ansible.cfg
+  configured module search path = ['/home/student/python/lib']
+  ansible python module location = /usr/local/lib/python3.6/dist-packages/ansible
+  executable location = /usr/local/bin/ansible-playbook
+  python version = 3.6.8 (default, Jan 14 2019, 11:02:34) [GCC 8.0.1 20180414 (experimental) [trunk revision 259383]]
+Using /home/student/python/ansible.cfg as config file
+setting up inventory plugins
+host_list declined parsing /etc/ansible/hosts as it did not pass it's verify_file() method
+Skipping due to inventory source not existing or not being readable by the current user
+script declined parsing /etc/ansible/hosts as it did not pass it's verify_file() method
+auto declined parsing /etc/ansible/hosts as it did not pass it's verify_file() method
+Skipping due to inventory source not existing or not being readable by the current user
+yaml declined parsing /etc/ansible/hosts as it did not pass it's verify_file() method
+Skipping due to inventory source not existing or not being readable by the current user
+ini declined parsing /etc/ansible/hosts as it did not pass it's verify_file() method
+Skipping due to inventory source not existing or not being readable by the current user
+toml declined parsing /etc/ansible/hosts as it did not pass it's verify_file() method
+Loading callback plugin default of type stdout, v2.0 from /usr/local/lib/python3.6/dist-packages/ansible/plugins/callback/default.py
+
+PLAYBOOK: playbookcustmod01.yml *************************************************************************************************************************
+Positional arguments: playbookcustmod01.yml
+verbosity: 4
+connection: smart
+timeout: 10
+become_method: sudo
+tags: ('all',)
+inventory: ('/etc/ansible/hosts',)
+forks: 5
+1 plays in playbookcustmod01.yml
+
+PLAY [Using new module] *********************************************************************************************************************************
+
+TASK [Gathering Facts] **********************************************************************************************************************************
+task path: /home/student/python/playbookcustmod01.yml:2
+<127.0.0.1> ESTABLISH LOCAL CONNECTION FOR USER: student
+<127.0.0.1> EXEC /bin/sh -c 'echo ~student && sleep 0'
+<127.0.0.1> EXEC /bin/sh -c '( umask 77 && mkdir -p "` echo /home/student/.ansible/tmp/ansible-tmp-1564146993.9628537-84263821401783 `" && echo ansible-tmp-1564146993.9628537-84263821401783="` echo /home/student/.ansible/tmp/ansible-tmp-1564146993.9628537-84263821401783 `" ) && sleep 0'
+Using module file /usr/local/lib/python3.6/dist-packages/ansible/modules/system/setup.py
+<127.0.0.1> PUT /home/student/.ansible/tmp/ansible-local-17558n36xlu9b/tmpj771xa1h TO /home/student/.ansible/tmp/ansible-tmp-1564146993.9628537-84263821401783/AnsiballZ_setup.py
+<127.0.0.1> EXEC /bin/sh -c 'chmod u+x /home/student/.ansible/tmp/ansible-tmp-1564146993.9628537-84263821401783/ /home/student/.ansible/tmp/ansible-tmp-1564146993.9628537-84263821401783/AnsiballZ_setup.py && sleep 0'
+<127.0.0.1> EXEC /bin/sh -c '/usr/bin/python3 /home/student/.ansible/tmp/ansible-tmp-1564146993.9628537-84263821401783/AnsiballZ_setup.py && sleep 0'
+<127.0.0.1> EXEC /bin/sh -c 'rm -f -r /home/student/.ansible/tmp/ansible-tmp-1564146993.9628537-84263821401783/ > /dev/null 2>&1 && sleep 0'
+ok: [localhost]
+META: ran handlers
+
+TASK [New mod] ******************************************************************************************************************************************
+task path: /home/student/python/playbookcustmod01.yml:6
+<127.0.0.1> ESTABLISH LOCAL CONNECTION FOR USER: student
+<127.0.0.1> EXEC /bin/sh -c 'echo ~student && sleep 0'
+<127.0.0.1> EXEC /bin/sh -c '( umask 77 && mkdir -p "` echo /home/student/.ansible/tmp/ansible-tmp-1564146995.3604395-161310382543637 `" && echo ansible-tmp-1564146995.3604395-161310382543637="` echo /home/student/.ansible/tmp/ansible-tmp-1564146995.3604395-161310382543637 `" ) && sleep 0'
+fatal: [localhost]: FAILED! => {
+    "msg": "Unable to import my_new_test_module due to invalid syntax"
+}
+
+PLAY RECAP **********************************************************************************************************************************************
+localhost                  : ok=1    changed=0    unreachable=0    failed=1    skipped=0    rescued=0    ignored=0   
+

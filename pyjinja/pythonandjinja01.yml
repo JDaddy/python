@@ -1,0 +1,55 @@
+---
+ - name: A few basic filters
+   hosts: localhost
+   gather_facts: no
+ 
+
+   vars:
+           test_list:
+                   - '192.168.2.1'
+                   - '10.10.0.2'
+                   - 'host.example.org'
+                   - '192.168.70.0/24'
+                   - 'fe80::100/10'
+                   - True
+                   - 'Witcher3 The Wild Hunt'
+                   - 'Earl Gray Tea, hot'
+           mytest_string: "ncc1701 use enterprise"
+           myaddresses: ['192.168.2.101', '10.0.3.50', '171.172.32.1']
+
+   tasks:
+           - name: Just want the IPs 
+             debug:
+                     msg: "{{ test_list | ipaddr }}"
+           # Just the jinja random_mac filter to finish a MAC address 
+           - name: spawn rando mac
+             debug:
+                     msg: "{{ '52:54:00' | random_mac }}"
+           # When using the var statement, Ansible would prefer you did NOT use muscatche brackets 
+           - name: some dont req mustache brackets 
+             debug:
+                     var: "'52:54:00' | random_mac"
+           # FYI - The no mustache brackets rule also aplies to when statements
+           # when: never use {{ }} in when statements
+
+           # Here is an example of usin ga python METHOD to parse our data
+           
+           # building a conditional around our task
+           # this will only print if our string ends in prise
+           - name: Test if our string ends in prise 
+             debug:
+                     msg: "{{ mytest_string.endswith('prise') }}"
+           
+           #  
+           - name: Jinja2 capitalizing string 
+             debug:
+                     msg: "{{ mytest_string.capitalize() }}"
+           
+           - name: pop the number 50 on the screen 
+             debug:
+                     msg: "{{ myaddresses|ipaddr(10.0.0.0/8'))[0].split('.')[3] }}"
+           - name: Show length 
+             debug:
+                     msg: "{{ mytest_string.length() }}"
+
+
